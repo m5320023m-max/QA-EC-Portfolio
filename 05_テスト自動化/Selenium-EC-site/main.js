@@ -11,6 +11,7 @@ const {runTC001,runTC002,runTC003,runTC004,runTC005,runTC006,runTC007,runTC008} 
 async function runTest() {
 
     const options = new chrome.Options();
+    options.addArguments("--headless=new");
     options.addArguments("--log-level=3");
     options.excludeSwitches("enable-logging");
     const driver = await new Builder().forBrowser("chrome").setChromeOptions(options).build();

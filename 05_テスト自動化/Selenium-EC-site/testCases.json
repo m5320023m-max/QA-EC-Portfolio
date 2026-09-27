@@ -1,0 +1,96 @@
+[
+    {
+        "description": "想定している商品一覧画面へ到達できているか確認",
+        "checks": [
+            {
+                "locatorType": "css",
+                "locator": "h1",
+                "expected": "商品一覧"
+            }
+        ]
+    },
+    {
+        "description": "テスト用商品が登録されているかどうかの確認",
+        "checks": [
+            {
+                "locatorType": "id",
+                "locator": "product-name",
+                "expected": "テスト商品A"
+            },
+            {
+                "locatorType": "id",
+                "locator": "product-price",
+                "expected": "1000円"
+            }
+        ]
+    },
+    {
+        "description": "一覧と詳細の情報が一致しているかどうか",
+        "checks": [
+            {
+                "locatorType": "id",
+                "locator": "product-name"
+            },
+            {
+                "locatorType": "id",
+                "locator": "product-price"
+            }
+        ]
+    },
+    {
+        "description": "数量に0を指定した場合、カート数量が更新されないことを確認",
+        "inputValue": "0",
+        "checks": [
+            {
+                "locatorType": "id",
+                "locator": "cart-count"
+            }
+        ]
+    },
+    {
+        "description": "数量を指定してカートへ追加し、カート数量が反映される",
+        "inputValue": "2",
+        "checks": [
+            {
+                "locatorType": "id",
+                "locator": "cart-count"
+            }
+        ]
+    },
+    {
+        "description": "カートに選択した商品が表示されている",
+        "checks": [
+            {
+                "locatorType": "id",
+                "locator": "cart-product-name"
+            }
+        ]
+    },
+    {
+        "description": "選択した商品の数量・金額が期待値と一致する",
+        "checks": [
+            {
+                "locatorType": "id",
+                "locator": "cart-quantity"
+            },
+            {
+                "locatorType": "id",
+                "locator": "cart-price"
+            },
+            {
+                "locatorType": "id",
+                "locator": "cart-total"
+            }
+        ]
+    },
+    {
+        "description": "カート画面に正しく到達できていることを確認",
+        "checks": [
+            {
+                "locatorType": "css",
+                "locator": "h1",
+                "expected": "カート"
+            }
+        ]
+    }
+]

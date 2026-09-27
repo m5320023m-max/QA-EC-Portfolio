@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>カート</title>
+    </head>
+    <body>
+        <h1>カート</h1>
+
+        <p>
+            商品名：<span id="cart-product-name"></span>
+        </p>
+
+        <p>
+            数量：<span id="cart-quantity"></span>
+        </p>
+
+        <p>
+            単価：<span id="cart-price"></span>円
+        </p>
+
+        <p>
+            合計金額：<span id="cart-total"></span>円
+        </p>
+
+        <script>
+            const productName = localStorage.getItem("cartProductName");
+            const quantity = localStorage.getItem("cartQuantity");
+            const price = localStorage.getItem("cartPrice");
+            const total = Number(price) * Number(quantity);
+
+            document.getElementById("cart-product-name").textContent = productName;
+            document.getElementById("cart-quantity").textContent = quantity;
+            document.getElementById("cart-price").textContent = price;
+            document.getElementById("cart-total").textContent = total;
+        </script>
+    </body>
+</html>

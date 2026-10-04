@@ -32,3 +32,11 @@ jobs:                           # workflowの中で実行する作業のまと�
         - name: Run Selenium tests
           run: npm test
           working-directory: 05_テスト自動化/Selenium-EC-site
+
+        # FAIL時のエビデンスをArtifactとして保存
+        - name: Upload failure evidence
+          if: failure()
+          uses: actions/upload-artifact@v4
+          with:
+            name: selenium-failure-evidence
+            path: 05_テスト自動化/Selenium-EC-site/selenium-results/

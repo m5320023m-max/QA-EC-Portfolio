@@ -52,8 +52,12 @@ async function runTest() {
         console.log("結果：FAIL\nエラー内容："+error.message);
         console.log(error.stack);
         console.log("-----------------");
+        
+        process.exitCode = 1;
+
     } finally {
         await driver.quit();
+
     }
 }
 

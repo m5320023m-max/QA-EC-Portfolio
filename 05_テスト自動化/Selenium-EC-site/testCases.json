@@ -5,7 +5,7 @@
             {
                 "locatorType": "css",
                 "locator": "h1",
-                "expected": "商品一覧"
+                "expected": "商品一覧_FAIL確認"
             }
         ]
     },

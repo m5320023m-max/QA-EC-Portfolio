@@ -3,8 +3,7 @@
         "description": "想定している商品一覧画面へ到達できているか確認",
         "checks": [
             {
-                "locatorType": "css",
-                "locator": "h1",
+                "target": "pageTitle",
                 "expected": "商品一覧"
             }
         ]
@@ -13,13 +12,11 @@
         "description": "テスト用商品が登録されているかどうかの確認",
         "checks": [
             {
-                "locatorType": "id",
-                "locator": "product-name",
+                "target": "productName",
                 "expected": "テスト商品A"
             },
             {
-                "locatorType": "id",
-                "locator": "product-price",
+                "target": "productPrice",
                 "expected": "1000円"
             }
         ]
@@ -28,12 +25,10 @@
         "description": "一覧と詳細の情報が一致しているかどうか",
         "checks": [
             {
-                "locatorType": "id",
-                "locator": "product-name"
+                "target": "productName"
             },
             {
-                "locatorType": "id",
-                "locator": "product-price"
+                "target": "productPrice"
             }
         ]
     },
@@ -42,8 +37,7 @@
         "inputValue": "0",
         "checks": [
             {
-                "locatorType": "id",
-                "locator": "cart-count"
+                "target": "cartCount"
             }
         ]
     },
@@ -52,8 +46,7 @@
         "inputValue": "2",
         "checks": [
             {
-                "locatorType": "id",
-                "locator": "cart-count"
+                "target": "cartCount"
             }
         ]
     },
@@ -61,8 +54,7 @@
         "description": "カートに選択した商品が表示されている",
         "checks": [
             {
-                "locatorType": "id",
-                "locator": "cart-product-name"
+                "target": "cartProductName"
             }
         ]
     },
@@ -70,16 +62,13 @@
         "description": "選択した商品の数量・金額が期待値と一致する",
         "checks": [
             {
-                "locatorType": "id",
-                "locator": "cart-quantity"
+                "target": "cartQuantity"
             },
             {
-                "locatorType": "id",
-                "locator": "cart-price"
+                "target": "cartPrice"
             },
             {
-                "locatorType": "id",
-                "locator": "cart-total"
+                "target": "cartTotal"
             }
         ]
     },
@@ -87,8 +76,7 @@
         "description": "カート画面に正しく到達できていることを確認",
         "checks": [
             {
-                "locatorType": "css",
-                "locator": "h1",
+                "target": "pageTitle",
                 "expected": "カート"
             }
         ]

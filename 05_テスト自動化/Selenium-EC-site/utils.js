@@ -3,8 +3,8 @@
 //--------------------------------------------------------------------//
 const fs = require("fs");
 const path = require("path");
-const { By } = require("selenium-webdriver");
 const assert = require("assert");
+const locators = require("./locators");
 
 /* テストケースID作成 */
 function createTestCaseId(number) {
@@ -49,12 +49,8 @@ function createRunFolder() {
 }
 
 function createLocator(check) {
-    if (check.locatorType === "css") {
-        return By.css(check.locator);
-    }
-
-    if (check.locatorType === "id") {
-        return By.id(check.locator);
+    if (check.target) {
+        return locators[check.target];
     }
 }
 

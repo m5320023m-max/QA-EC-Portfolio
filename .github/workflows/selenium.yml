@@ -2,6 +2,7 @@ name: Selenium E2E Test         # GitHub Actions上で見える名前
 
 on:                             # 何をきっかけにworkflowを動かすか
   push:                         # GitHubへpushされたタイミングで実行
+  workflow_dispatch:            # GitHubの画面から手動実行
 
 jobs:                           # workflowの中で実行する作業のまとまり
   selenium-test:                # jobにつけた名前

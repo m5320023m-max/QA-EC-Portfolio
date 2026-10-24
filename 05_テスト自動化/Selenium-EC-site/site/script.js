@@ -1,24 +1,40 @@
+/* 商品識別用に入力された商品名＆価格を取得 */
+const productId = new URLSearchParams(window.location.search).get("id");
+const previousProductId = localStorage.getItem("cartProductId");
+if (previousProductId !== productId) {
+    localStorage.setItem("cartQuantity", 1);
+}
+localStorage.setItem("cartProductId", productId);
 const savedQuantity = localStorage.getItem("cartQuantity");
-
 if (savedQuantity !== null) {
-    document.getElementById("cart-count").textContent = savedQuantity;
+    document.getElementById("quantity").textContent = Math.max(1, Number(savedQuantity));
 }
 
-const addCartButton = document.getElementById("add-cart");
+const product = products[productId];
+localStorage.setItem("cartProductName", product.name);
+localStorage.setItem("cartPrice", product.price);
+document.getElementById("product-name").textContent = product.name;
+document.getElementById("product-price").textContent = product.price + "円";
 
-addCartButton.addEventListener("click", () => {
-    const quantity = document.getElementById("quantity").value;
+/* 商品増減 */
+const increaseButton = document.getElementById("increase-quantity");
+const decreaseButton = document.getElementById("decrease-quantity");
 
-    if (Number(quantity) < 1) {
+increaseButton.addEventListener("click", () => {
+    const quantityElement = document.getElementById("quantity");
+    const quantity = Number(quantityElement.textContent);
+
+    quantityElement.textContent = quantity + 1;
+    localStorage.setItem("cartQuantity", quantity + 1);
+});
+decreaseButton.addEventListener("click", () => {
+    const quantityElement = document.getElementById("quantity");
+    const quantity = Number(quantityElement.textContent);
+
+    if (quantity <= 1) {
         return;
     }
 
-    const productName = document.getElementById("product-name").textContent;
-    const productPrice = document.getElementById("product-price").textContent.replace("円", "");
-
-    localStorage.setItem("cartQuantity", quantity);
-    localStorage.setItem("cartProductName", productName);
-    localStorage.setItem("cartPrice", productPrice);
-
-    document.getElementById("cart-count").textContent = quantity;
+    quantityElement.textContent = quantity - 1;
+    localStorage.setItem("cartQuantity", quantity - 1);
 });

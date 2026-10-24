@@ -3,9 +3,8 @@
 //--------------------------------------------------------------------//
 const {Builder} = require("selenium-webdriver");
 const chrome = require("selenium-webdriver/chrome");
-const testCases = require("./testCases.json");
-const {createTestCaseId} = require("./utils");
 const {writeLog,saveScreenshot} = require("./results");
+const { getTestCase } = require("./utils");
 const {runTC001,runTC002,runTC003,runTC004,runTC005,runTC006,runTC007,runTC008} = require("./testFunctions");
 
 async function runTest() {
@@ -15,40 +14,39 @@ async function runTest() {
     options.addArguments("--log-level=3");
     options.excludeSwitches("enable-logging");
     const driver = await new Builder().forBrowser("chrome").setChromeOptions(options).build();
-
-    let tcNumber = 1;       // テストケース番号
-    let tcString = "";      // TC-テストケース番号
+    const targetProductId = "B";
+    let testCaseId = "";      // TC-テストケース番号
 
     try {
         await driver.get("http://127.0.0.1:5500/index.html");
 
-        tcString = createTestCaseId(tcNumber++);
-        await runTC001(driver,testCases[0],tcString);
+        testCaseId = "TC-001";
+        await runTC001(driver, getTestCase(testCaseId));
 
-        tcString = createTestCaseId(tcNumber++);
-        const { pdName, pdPrice } = await runTC002(driver,testCases[1],tcString);
+        testCaseId = "TC-002";
+        const { pdName, pdPrice } = await runTC002(driver, getTestCase(testCaseId), targetProductId);
 
-        tcString = createTestCaseId(tcNumber++);
-        const detailPdName = await runTC003(driver,testCases[2],tcString,pdName,pdPrice);
+        testCaseId = "TC-003";
+        const detailPdName = await runTC003(driver, getTestCase(testCaseId), pdName, pdPrice, targetProductId);
 
-        tcString = createTestCaseId(tcNumber++);
-        await runTC004(driver,testCases[3],tcString);
+        // testCaseId = "TC-004";
+        // await runTC004(driver, getTestCase(testCaseId));
 
-        tcString = createTestCaseId(tcNumber++);
-        const inputQuantity = await runTC005(driver,testCases[4],tcString);
+        testCaseId = "TC-005";
+        const inputQuantity = await runTC005(driver, getTestCase(testCaseId));
+ 
+        testCaseId = "TC-006";
+        await runTC006(driver, getTestCase(testCaseId), detailPdName);
 
-        tcString = createTestCaseId(tcNumber++);
-        await runTC006(driver,testCases[5],tcString,detailPdName);
+        testCaseId = "TC-007";
+        await runTC007(driver, getTestCase(testCaseId), inputQuantity, pdPrice);
 
-        tcString = createTestCaseId(tcNumber++);
-        await runTC007(driver,testCases[6],tcString,inputQuantity,pdPrice);
-
-        tcString = createTestCaseId(tcNumber++);
-        await runTC008(driver,testCases[7],tcString);
+        testCaseId = "TC-008";
+        await runTC008(driver, getTestCase(testCaseId));
 
     } catch (error) {
-        await saveScreenshot(driver, tcString+"_FAIL");
-        writeLog(tcString+" 結果：FAIL\nエラー内容："+error.message);
+        await saveScreenshot(driver, testCaseId+"_FAIL");
+        writeLog(testCaseId+" 結果：FAIL\nエラー内容："+error.message);
         console.log("結果：FAIL\nエラー内容："+error.message);
         console.log(error.stack);
         console.log("-----------------");

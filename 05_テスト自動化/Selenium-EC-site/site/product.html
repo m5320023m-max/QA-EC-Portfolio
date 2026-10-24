@@ -7,20 +7,18 @@
     </head>
     <body>
         <h1>商品詳細</h1>
-        <h2 id="product-name">テスト商品A</h2>
-        <p id="product-price">1000円</p>
-        <label>
-            数量
-            <input type="number" id="quantity" value="1" min="1">
-        </label>
-        <button id="add-cart">カートへ追加</button>
+        <h2 id="product-name"></h2>
+        <p id="product-price"></p>
+        <label>数量</label>
+        <button id="decrease-quantity">−</button>
+        <span id="quantity">1</span>
+        <button id="increase-quantity">＋</button>
 
-        <p>
-            カート数量：<span id="cart-count">0</span>
-        </p>
-
+    <p>
         <a href="cart.html" id="cart-link">カートを見る</a>
+    </p>
 
+        <script src="productlist.js"></script>
         <script src="script.js"></script>
     </body>
 </html>

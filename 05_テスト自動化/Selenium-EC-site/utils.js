@@ -5,10 +5,17 @@ const fs = require("fs");
 const path = require("path");
 const assert = require("assert");
 const locators = require("./locators");
+const testCases = require("./testCases.json");
 
-/* テストケースID作成 */
-function createTestCaseId(number) {
-    return `TC-${String(number).padStart(3, "0")}`;
+/* testCase.jsonからケース検索 */
+function getTestCase(id) {
+    const testCase = testCases.find(testCase => testCase.id === id);
+
+    if (!testCase) {
+        throw new Error(`テストケースが見つかりません: ${id}`);
+    }
+
+    return testCase;
 }
 
 /* 現在時刻取得 */
@@ -56,11 +63,11 @@ function createLocator(check) {
 
 /* checkを受け取る→対象要素を探す→実際の文字を取得→
 expectedと比較→取得した文字をreturnする */
-async function checkText(driver, check, expected = check.expected) {
-    const actual = await driver.findElement(createLocator(check)).getText();
+async function checkText(driver, check, expected = check.expected, searchRoot = driver) {
+    const actual = await searchRoot.findElement(createLocator(check)).getText();
     assert.strictEqual(actual, expected);
 
     return actual;
 }
 
-module.exports = {createTestCaseId,getLogTimestamp,createRunFolder,createLocator,checkText};
+module.exports = {getTestCase,getLogTimestamp,createRunFolder,createLocator,checkText};

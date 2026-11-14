@@ -5,6 +5,7 @@ const {Builder} = require("selenium-webdriver");
 const chrome = require("selenium-webdriver/chrome");
 const {writeLog,saveScreenshot} = require("./results");
 const { getTestCase } = require("./utils");
+const { BASE_URL } = require("../../config");
 const {runTC001,runTC002,runTC003,runTC004,runTC005,runTC006,runTC007,runTC008} = require("./testFunctions");
 
 async function runTest() {
@@ -18,7 +19,7 @@ async function runTest() {
     let testCaseId = "";      // TC-テストケース番号
 
     try {
-        await driver.get("http://127.0.0.1:5500/index.html");
+        await driver.get(BASE_URL);
 
         testCaseId = "TC-001";
         await runTC001(driver, getTestCase(testCaseId));

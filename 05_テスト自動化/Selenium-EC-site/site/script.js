@@ -10,11 +10,22 @@ if (savedQuantity !== null) {
     document.getElementById("quantity").textContent = Math.max(1, Number(savedQuantity));
 }
 
-const product = products[productId];
-localStorage.setItem("cartProductName", product.name);
-localStorage.setItem("cartPrice", product.price);
-document.getElementById("product-name").textContent = product.name;
-document.getElementById("product-price").textContent = product.price + "円";
+async function loadProduct() {
+    const response = await fetch(`http://localhost:3000/api/products/${productId}`);
+
+    if (!response.ok) {
+        throw new Error(`商品情報の取得に失敗しました: ${response.status}`);
+    }
+
+    const product = await response.json();
+
+    localStorage.setItem("cartProductName", product.name);
+    localStorage.setItem("cartPrice", product.price);
+    document.getElementById("product-name").textContent = product.name;
+    document.getElementById("product-price").textContent = product.price + "円";
+}
+
+loadProduct().catch(console.error);
 
 /* 商品増減 */
 const increaseButton = document.getElementById("increase-quantity");

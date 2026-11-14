@@ -48,7 +48,7 @@ function createRunFolder() {
         `${year}${month}${day}_${hour}${minute}${second}`;
 
     const folderPath =
-        path.join(__dirname, "selenium-results", folderName);
+        path.join(process.cwd(), "selenium-results", folderName);
 
     fs.mkdirSync(folderPath, { recursive: true });
 

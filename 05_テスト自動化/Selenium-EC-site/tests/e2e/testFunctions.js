@@ -5,7 +5,7 @@ const {until} = require("selenium-webdriver");
 const {checkText} = require("./utils");
 const {resultPass} = require("./results");
 const locators = require("./locators");
-const products = require("./site/productlist");
+const products = require("../../server/productlist.js");
 const assert = require("assert");
 
 async function runTC001(driver, testCase) {
@@ -19,8 +19,8 @@ async function runTC001(driver, testCase) {
 async function runTC002(driver, testCase, productId) {
     const testCaseId = testCase.id;
     console.log(testCaseId + "：" + testCase.description);
+    const productElement = await driver.wait(until.elementLocated(locators.productContainer(productId)),10000);
 
-    const productElement = await driver.findElement(locators.productContainer(productId));
     const pdName = await checkText(driver,testCase.checks[0],products[productId].name,productElement);
     const pdPrice = await checkText(driver,testCase.checks[1],products[productId].price + "円",productElement);
     await resultPass(driver, testCaseId);

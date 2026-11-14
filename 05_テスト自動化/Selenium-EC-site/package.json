@@ -4,7 +4,7 @@
   "description": "",
   "main": "./site/script.js",
   "scripts": {
-    "test": "node main.js"
+    "test": "node tests/e2e/main.js"
   },
   "keywords": [],
   "author": "",

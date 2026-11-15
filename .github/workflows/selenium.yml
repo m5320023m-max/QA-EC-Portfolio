@@ -62,6 +62,11 @@ jobs:                           # workflowの中で実行する作業のまと�
             echo "EC site failed to start"
             exit 1
 
+        # APIテストを実行
+        - name: Run API tests
+          run: node tests/api/apiTest.js
+          working-directory: 05_テスト自動化/Selenium-EC-site
+
         # Seleniumテストを実行
         - name: Run Selenium tests
           run: npm test

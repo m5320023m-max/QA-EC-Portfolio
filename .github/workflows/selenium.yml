@@ -30,6 +30,38 @@ jobs:                           # workflowの中で実行する作業のまと�
           run: python3 -m http.server 5500 --directory site &
           working-directory: 05_テスト自動化/Selenium-EC-site
 
+        # APIサーバーを起動
+        - name: Start API server
+          run: nohup node server/apiServer.js > /tmp/api-server.log 2>&1 &
+          working-directory: 05_テスト自動化/Selenium-EC-site
+
+        # APIサーバーの起動完了を確認
+        - name: Wait for API server
+          run: |
+            for i in {1..20}; do
+              if curl -fsS http://127.0.0.1:3000/api/products > /dev/null; then
+                echo "API server is ready"
+                exit 0
+              fi
+              sleep 1
+            done
+            echo "API server failed to start"
+            cat /tmp/api-server.log
+            exit 1
+
+        # ECサイトの起動完了を確認
+        - name: Wait for EC site
+          run: |
+            for i in {1..20}; do
+              if curl -fsS http://127.0.0.1:5500/index.html > /dev/null; then
+                echo "EC site is ready"
+                exit 0
+              fi
+              sleep 1
+            done
+            echo "EC site failed to start"
+            exit 1
+
         # Seleniumテストを実行
         - name: Run Selenium tests
           run: npm test

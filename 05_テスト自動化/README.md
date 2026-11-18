@@ -121,7 +121,7 @@ Status Code：`200 OK`
 
 GitHub Actionsのワークフローは、リポジトリ直下の`.github/workflows/selenium.yml`に配置している。
 
-## 6. 保守性改善の取り組み（7か月目）
+## 6. 保守性改善の取り組み
 テスト対象やテストケースの追加・変更による影響を抑えるため、Seleniumコードの構造を見直した。
 
 ### 主な改善内容
@@ -137,8 +137,8 @@ GitHub Actionsのワークフローは、リポジトリ直下の`.github/workfl
 - ローカル環境で主要E2Eテスト7件がPASS
 - GitHub Actionsでも主要E2Eテスト7件がPASS
 
-8か月目には、フロントエンド・バックエンド・テストコードをそれぞれ`site/`、`server/`、`tests/`に整理した。
-## 7. APIテストの実装（8か月目）
+フロントエンド・バックエンド・テストコードをそれぞれ`site/`、`server/`、`tests/`に整理した。
+## 7. APIテストの実装
 Node.jsの`fetch`と`assert`を利用し、APIテストを5件作成した。
 
 ### 正常系：3件

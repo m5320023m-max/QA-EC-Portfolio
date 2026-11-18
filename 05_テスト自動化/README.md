@@ -83,3 +83,14 @@ GitHub Actions上で以下を自動実行する。
 GitHub Actions実行時は、実行結果画面の `Artifacts` から
 `selenium-test-evidence` をダウンロードして確認できる。
 PASS / FAILどちらの場合もエビデンスを保存する。
+
+## HTTP・API連携
+
+Node.jsでAPIサーバーを実装し、商品一覧・商品詳細を
+APIから取得する構成に変更した。
+
+APIテスト5件とSelenium E2Eテスト7件を
+GitHub Actionsで自動実行する。
+- [画面操作とAPI通信の流れ](./Selenium-EC-site/docs/ui-api-flow.md)
+- API自動テスト：Selenium-EC-site/tests/api/apiTest.js
+- E2E自動テスト：Selenium-EC-site/tests/e2e/
